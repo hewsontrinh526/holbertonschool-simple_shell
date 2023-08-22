@@ -2,26 +2,24 @@
 
 int main(void)
 {
+	char *buffer;
+	size_t bufsize;
+	ssize_t read;
         pid_t child;
-        char *command[16], *tok, *lineptr = NULL;
+        char *command[16];
+	char *tok;
 	char *filepath;
 	size_t i;
-	size_t n;
-	ssize_t read;
         int status;
 
         while (1)
         {
-		if (isatty(STDIN_FILENO) == 1)
-		{
-			printf("$ ");
-		}
-		read = getline(&lineptr, &n, stdin);
-		if (read == -1)
-                {
-			break;
-                }
-		tok = strtok(lineptr, " \t\n\r");
+		buffer = NULL;
+		bufsize = 0;
+
+		get_input(&buffer, &bufsize, &read);
+
+		tok = strtok(buffer, " \t\n\r");
                 i = 0;
                 while (i < 16 && tok != NULL)
                 {
@@ -64,6 +62,6 @@ int main(void)
 			wait(&status);
 		}
 	}
-	free(lineptr);
+	free(buffer);
 	exit(status);
 }

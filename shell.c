@@ -5,6 +5,7 @@ int main(void)
 	char *buffer;
 	size_t bufsize;
 	ssize_t read;
+	char *str;
         pid_t child;
         char *command[16];
 	char *tok;
@@ -19,7 +20,11 @@ int main(void)
 
 		get_input(&buffer, &bufsize, &read);
 
-		tok = strtok(buffer, " \t\n\r");
+		str = strdup(buffer);
+
+		free(buffer);
+
+		tok = strtok(str, " \t\n\r");
                 i = 0;
 
 		while (i < 16 && tok != NULL)
@@ -63,6 +68,6 @@ int main(void)
 			wait(&status);
 		}
 	}
-	free(buffer);
+	free(str);
 	exit(status);
 }

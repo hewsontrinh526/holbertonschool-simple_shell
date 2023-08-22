@@ -17,9 +17,15 @@ typedef struct builtin_cmd
         int (*f)(void);
 } builtin_cmd_t;
 
+/* Shell Commands */
+void get_input(char **buffer, size_t *bufsize, ssize_t *read);
+
 int execute_builtin_cmd(char *tokenised_array);
 int print_env();
 int exit_shell();
 extern char **environ;
+
+char *_getenv(const char *name);
+char *find_executable_in_path(char *command);
 
 #endif

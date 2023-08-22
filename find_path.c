@@ -30,6 +30,7 @@ char *find_executable_in_path(char *cmd)
 
 		if (stat(filepath, &st) == 0 && st.st_mode & S_IXUSR)
 		{
+			free(path);
 			return (filepath);
 		}
 		free(filepath);

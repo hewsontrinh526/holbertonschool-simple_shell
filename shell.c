@@ -46,10 +46,8 @@ int main(void)
                 {
                         wait(&status);
                 }
-        }
-	if (lineptr != NULL)
-	{
-		free(lineptr);
 	}
+	free(lineptr);
+	free(command);
         exit(status);
 }

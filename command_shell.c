@@ -2,6 +2,7 @@
 
 void get_input(char **buffer, size_t *bufsize, ssize_t *read)
 {
+	signal(SIGINT, SIG_IGN);
 	if (isatty(0) == 1)
 	{
 		printf("$ ");

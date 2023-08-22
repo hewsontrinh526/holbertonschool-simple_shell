@@ -61,3 +61,22 @@ int fork_the_child(char **command, char **environ, char **str)
 	}
 	return (status);
 }
+
+void line_to_array(char *str, char **command)
+{
+	int i;
+	const char *delim;
+	char *token;
+
+	i = 0;
+	delim = " \t\n";
+	token = strtok(str, delim);
+
+	while (token != NULL)
+	{
+		command[i] = token;
+		token = strtok(NULL, delim);
+		i = i + 1;
+	}
+	command[i] = NULL;
+}

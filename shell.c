@@ -6,12 +6,10 @@ int main(void)
 	size_t bufsize;
 	ssize_t read;
 	char *str;
-        pid_t child;
+	int exit_status;
         char *command[16];
 	char *tok;
-	char *filepath;
 	size_t i;
-        int status;
 
         while (1)
         {
@@ -33,41 +31,11 @@ int main(void)
                         tok = strtok(NULL, " \t\n\r");
                         i = i + 1;
                 }
-                command[i] = NULL;
-                child = fork();
-                if (child == 0)
-		{
-			if (strchr(command[0], '/') != NULL)
-			{
-				if (execve(command[0], command, environ) == - 1)
-				{
-					perror("Error executing command");
-					exit(127);
-				}
-			}
-			else
-			{
-				filepath = find_executable_in_path(command[0]);
-				if (filepath != NULL)
-				{
-					if (execve(filepath, command, environ) == -1)
-					{
-						perror("Error executing");
-						exit(127);
-					}
-				}
-				else
-				{
-					printf("%s: command not found\n", command[0]);
-					return (-1);
-				}
-			}
-		}
-		if (child > 0)
-		{
-			wait(&status);
-		}
+
+		command[i] = NULL;
+
+		exit_status = fork_the_child(command, environ, &str);
 	}
 	free(str);
-	exit(status);
+	exit(exit_status);
 }

@@ -48,6 +48,5 @@ int main(void)
                 }
 	}
 	free(lineptr);
-	free(command);
         exit(status);
 }

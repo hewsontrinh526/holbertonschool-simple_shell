@@ -35,6 +35,6 @@ char *find_executable_in_path(char *cmd)
 		free(filepath);
 		dir = strtok(NULL, ":");
 	}
-	free(path);
+	free(path)
 	return (NULL);
 }

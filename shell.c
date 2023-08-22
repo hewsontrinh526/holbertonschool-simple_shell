@@ -3,8 +3,9 @@
 int main(void)
 {
         pid_t child;
-        char *argv[100], *tok, *lineptr = NULL;
-        size_t i;
+        char *command[16], *tok, *lineptr = NULL;
+	char *filepath;
+	size_t i;
 	size_t n;
 	ssize_t read;
         int status;
@@ -15,39 +16,54 @@ int main(void)
 		{
 			printf("$ ");
 		}
-
 		read = getline(&lineptr, &n, stdin);
-
 		if (read == -1)
                 {
-                        break;
+			break;
                 }
-
 		tok = strtok(lineptr, " \t\n\r");
                 i = 0;
-
-		while (i < 100 && tok != NULL)
+                while (i < 16 && tok != NULL)
                 {
-                        argv[i] = tok;
+                        command[i] = tok;
                         tok = strtok(NULL, " \t\n\r");
                         i = i + 1;
                 }
-
-		argv[i] = NULL;
+                command[i] = NULL;
                 child = fork();
-
-		if (child == 0)
-                {
-                        if (execve(argv[0], argv, NULL) == -1)
-                        {
-                                exit(EXIT_FAILURE);
-                        }
-                }
-                if (child > 0)
-                {
-                        wait(&status);
-                }
+                if (child == 0)
+		{
+			if (strchr(command[0], '/') != NULL)
+			{
+				if (execve(command[0], command, environ) == - 1)
+				{
+					perror("Error executing command");
+					exit(127);
+				}
+			}
+			else
+			{
+				filepath = find_executable_in_path(command[0]);
+				if (filepath != NULL)
+				{
+					if (execve(filepath, command, environ) == -1)
+					{
+						perror("Error executing");
+						exit(127);
+					}
+				}
+				else
+				{
+					printf("%s: command not found\n", command[0]);
+					return (-1);
+				}
+			}
+		}
+		if (child > 0)
+		{
+			wait(&status);
+		}
 	}
 	free(lineptr);
-        exit(status);
+	exit(status);
 }

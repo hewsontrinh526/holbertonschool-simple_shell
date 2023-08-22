@@ -18,6 +18,7 @@ typedef struct builtin_cmd
 } builtin_cmd_t;
 
 void get_input(char **buffer, size_t *bufsize, ssize_t *read);
+int fork_the_child(char **command, char **environ, char **str);
 int execute_builtin_cmd(char *tokenised_array);
 int print_env();
 int exit_shell();

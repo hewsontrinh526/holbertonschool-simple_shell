@@ -21,7 +21,8 @@ int main(void)
 
 		tok = strtok(buffer, " \t\n\r");
                 i = 0;
-                while (i < 16 && tok != NULL)
+
+		while (i < 16 && tok != NULL)
                 {
                         command[i] = tok;
                         tok = strtok(NULL, " \t\n\r");

@@ -26,7 +26,7 @@ char *find_executable_in_path(char *cmd)
 	while (dir != NULL)
 	{
 		char *filepath = malloc(strlen(dir) + strlen(cmd) + 2);
-		sprintf(filepath, "%s/%s", directory, cmd);
+		sprintf(filepath, "%s/%s", dir, cmd);
 
 		if (stat(filepath, &st) == 0 && st.st_mode & S_IXUSR)
 		{

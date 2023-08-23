@@ -8,9 +8,7 @@ int main(void)
         char **command;
 	char *str;
 	int built_in_checker;
-	int status;
-
-	status = 0;
+	int exit_status;
 
         while (1)
         {
@@ -26,17 +24,17 @@ int main(void)
 
 		line_to_array(str, command);
 
-		built_in_checker = checkbuiltin(command, environ, str, status);
+		built_in_checker = checkbuiltin(command, environ, str);
 
 		if (built_in_checker == 1)
 		{
 			continue;
 		}
 
-		fork_the_child(command, environ, &str, status);
+		exit_status = fork_the_child(command, environ, &str);
 
 		free(command);
 		free(str);
 	}
-	exit(status);
+	exit(exit_status);
 }

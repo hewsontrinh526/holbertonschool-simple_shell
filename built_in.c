@@ -20,14 +20,14 @@ int print_env(void)
 }
 
 
-int check_built_in(char **array)
+int check_built_in(char **array, int *status)
 {
 	int i;
 
 	if (strcmp(array[0], "exit") == 0)
 	{
-		i = exit_shell();
-		return (i);
+		free(array);
+		exit(*status);
 	}
 	else if (strcmp(array[0], "env") == 0)
 	{

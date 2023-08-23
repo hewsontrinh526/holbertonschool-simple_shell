@@ -65,7 +65,7 @@ int fork_the_child(char **command, char **environ, char **str, int status)
 	{
 		wait(&stat);
 	}
-	return (stat);
+	return (status);
 }
 
 void line_to_array(char *str, char **command)

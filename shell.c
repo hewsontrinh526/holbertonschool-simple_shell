@@ -25,12 +25,15 @@ int main(void)
 
 		line_to_array(str, command);
 
-		built_in_checker = check_built_in(command, &status);
+		built_in_checker = checkbuiltin(command, &status, str);
 
 		if (built_in_checker == 1)
 		{
-			exit_status = fork_the_child(command, environ, &str);
+			continue;
 		}
+
+		exit_status = fork_the_child(command, environ, &str);
+
 		free(command);
 		free(str);
 	}

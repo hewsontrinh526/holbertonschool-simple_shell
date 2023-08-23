@@ -23,13 +23,13 @@ int fork_the_child(char **command, char **environ, char **str)
 	pid_t child;
 	char *filepath;
 	int status;
+	int exit_status = 1;
 
 	child = fork();
 
 	if (child == -1)
 	{
 		printf("./hsh: 1: %s: not found\n", command[0]);
-		perror("fork");
 		exit(EXIT_FAILURE);
 	}
 	else if (child == 0)
@@ -68,8 +68,12 @@ int fork_the_child(char **command, char **environ, char **str)
 	else
 	{
 		wait(&status);
+		if (WIFEXITED(status))
+		{
+			exit_status = WEXITSTATUS(status);
+		}
 	}
-	return (WEXITSTATUS(status));
+	return (exit_status);
 }
 
 void line_to_array(char *str, char **command)

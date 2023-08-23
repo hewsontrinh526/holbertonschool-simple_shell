@@ -6,7 +6,6 @@ int main(void)
 	size_t bufsize;
 	ssize_t read;
 	int exit_status;
-	/* int status; */
         char **command;
 	char *str;
 	int built_in_checker;

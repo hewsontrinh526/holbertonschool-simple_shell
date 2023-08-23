@@ -15,7 +15,7 @@ int print_env(char **array)
 }
 
 
-int checkbuiltin(char **array, char **environ, char *str, int status)
+int checkbuiltin(char **array, char **environ, char *str)
 {
 	if (array[0] == NULL)
 	{
@@ -27,7 +27,7 @@ int checkbuiltin(char **array, char **environ, char *str, int status)
 	{
 		free(str);
 		free(array);
-		exit(status);
+		exit(EXIT_SUCCESS);
 	}
 	else if (strcmp(array[0], "env") == 0)
 	{

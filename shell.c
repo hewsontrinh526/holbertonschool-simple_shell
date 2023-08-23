@@ -8,11 +8,9 @@ int main(void)
         char **command;
 	char *str;
 	int built_in_checker;
-	int *status;
+	int status;
 
-	status = malloc(sizeof(int));
-
-	*status = 0;
+	status = 0;
 
         while (1)
         {
@@ -40,6 +38,5 @@ int main(void)
 		free(command);
 		free(str);
 	}
-	free(*status);
 	exit(*status);
 }

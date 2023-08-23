@@ -5,7 +5,6 @@ int main(void)
 	char *buffer;
 	size_t bufsize;
 	ssize_t read;
-	/* int exit_status; */
         char **command;
 	char *str;
 	int built_in_checker;
@@ -29,7 +28,7 @@ int main(void)
 
 		line_to_array(str, command);
 
-		built_in_checker = checkbuiltin(command, environ, str);
+		built_in_checker = checkbuiltin(command, environ, str, status);
 
 		if (built_in_checker == 1)
 		{

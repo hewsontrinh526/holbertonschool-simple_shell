@@ -33,6 +33,7 @@ int fork_the_child(char **command, char **environ, char **str)
 			if (execve(command[0], command, environ) == -1)
 			{
 				perror("Error executing command");
+				free(command);
 				free(*str);
 				exit(127);
 			}
@@ -45,6 +46,7 @@ int fork_the_child(char **command, char **environ, char **str)
 				if (execve(filepath, command, environ) == -1)
 				{
 					perror("Error executing command");
+					free(command);
 					free(*str);
 					exit(127);
 				}
@@ -52,6 +54,7 @@ int fork_the_child(char **command, char **environ, char **str)
 			else
 			{
 				printf("%s: command not found\n", command[0]);
+				free(command);
 				return (-1);
 			}
 		}

@@ -26,7 +26,7 @@ int execute_builtin_cmd(char *tokenised_array);
 
 int print_env(void);
 int exit_shell(void);
-int check_built_in(char **array);
+int check_built_in(char **array, int *status);
 
 char *_getenv(const char *name);
 char *find_executable_in_path(char *command);

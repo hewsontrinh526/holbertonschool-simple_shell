@@ -26,7 +26,12 @@ int fork_the_child(char **command, char **environ, char **str)
 
 	child = fork();
 
-	if (child == 0)
+	if (child == -1)
+	{
+		perror("fork");
+		exit(EXIT_FAILURE);
+	}
+	else if (child == 0)
 	{
 		if (strchr(command[0], '/') != NULL)
 		{
@@ -55,11 +60,11 @@ int fork_the_child(char **command, char **environ, char **str)
 			{
 				printf("%s: command not found\n", command[0]);
 				free(command);
-				return (WEXITSTATUS(status));
+				return (status);
 			}
 		}
 	}
-	if (child > 0)
+	else
 	{
 		wait(&status);
 	}

@@ -25,7 +25,7 @@ int main(void)
 
 		line_to_array(str, command);
 
-		built_in_checker = checkbuiltin(command, &status, str);
+		built_in_checker = checkbuiltin(command, environ, &status, str);
 
 		if (built_in_checker == 1)
 		{

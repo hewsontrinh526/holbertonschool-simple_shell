@@ -6,6 +6,7 @@ int main(void)
 	size_t bufsize;
 	ssize_t read;
 	int exit_status;
+	int status;
         char **command;
 	char *str;
 	int built_in_checker;
@@ -24,12 +25,8 @@ int main(void)
 
 		line_to_array(str, command);
 
-		built_in_checker = check_built_in(command);
+		built_in_checker = check_built_in(command, &status);
 
-		if (built_in_checker == 2)
-		{
-			break;
-		}
 		if (built_in_checker == 1)
 		{
 			exit_status = fork_the_child(command, environ, &str);

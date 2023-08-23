@@ -1,36 +1,39 @@
 #include "main.h"
 
-int print_env(void)
+int print_env(char **array)
 {
 	int i;
 
 	i = 0;
 
-	while (environ[i] != NULL)
+	while (array[i] != NULL)
 	{
-		printf("%s\n", environ[i]);
+		printf("%s\n", array[i]);
 		i = i + 1;
 	}
 	return (0);
 }
 
 
-int checkbuiltin(char **array, int *status, char *str)
+int checkbuiltin(char **array, char **environ, int *status, char *str)
 {
 	if (array[0] == NULL)
 	{
 		free(str);
+		free(array);
 		return (1);
 	}
 	if (strcmp(array[0], "exit") == 0)
 	{
 		free(str);
+		free(array);
 		exit(*status);
 	}
 	else if (strcmp(array[0], "env") == 0)
 	{
-		print_env();
+		print_env(environ);
 		free(str);
+		free(array);
 		return (1);
 	}
 	return (0);

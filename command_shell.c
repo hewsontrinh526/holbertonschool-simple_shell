@@ -63,7 +63,7 @@ int fork_the_child(char **command, char **environ, char **str)
 	{
 		wait(&status);
 	}
-	return (status);
+	return (WEXITSTATUS(status));
 }
 
 void line_to_array(char *str, char **command)

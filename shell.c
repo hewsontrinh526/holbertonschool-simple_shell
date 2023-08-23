@@ -8,6 +8,7 @@ int main(void)
 	int exit_status;
         char **command;
 	char *str;
+	int built_in_checker;
 
         while (1)
         {
@@ -23,7 +24,16 @@ int main(void)
 
 		line_to_array(str, command);
 
-		exit_status = fork_the_child(command, environ, &str);
+		built_in_checker = check_built_in(command);
+
+		if (built_in_checker == 2)
+		{
+			break;
+		}
+		if (built_in_checker == 1)
+		{
+			exit_status = fork_the_child(command, environ, &str);
+		}
 		free(command);
 		free(str);
 	}

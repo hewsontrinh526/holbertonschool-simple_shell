@@ -1,10 +1,5 @@
 #include "main.h"
 
-int exit_shell(void)
-{
-	return (2);
-}
-
 int print_env(void)
 {
 	int i;
@@ -20,10 +15,13 @@ int print_env(void)
 }
 
 
-int check_built_in(char **array, int *status)
+int checkbuiltin(char **array, int *status, char *str)
 {
-	int i;
-
+	if (array[0] == NULL)
+	{
+		free(str);
+		return (1);
+	}
 	if (strcmp(array[0], "exit") == 0)
 	{
 		free(array);
@@ -31,8 +29,9 @@ int check_built_in(char **array, int *status)
 	}
 	else if (strcmp(array[0], "env") == 0)
 	{
-		i = print_env();
-		return (i);
+		print_env();
+		free(str);
+		return (1);
 	}
-	return (1);
+	return (0);
 }

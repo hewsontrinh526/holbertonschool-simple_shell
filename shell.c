@@ -38,5 +38,5 @@ int main(void)
 		free(command);
 		free(str);
 	}
-	exit(*status);
+	exit(status);
 }

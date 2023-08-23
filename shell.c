@@ -5,10 +5,15 @@ int main(void)
 	char *buffer;
 	size_t bufsize;
 	ssize_t read;
-	int exit_status;
+	/* int exit_status; */
         char **command;
 	char *str;
 	int built_in_checker;
+	int *status;
+
+	status = malloc(sizeof(int));
+
+	*status = 0;
 
         while (1)
         {
@@ -31,10 +36,10 @@ int main(void)
 			continue;
 		}
 
-		exit_status = fork_the_child(command, environ, &str);
+		fork_the_child(command, environ, &str, status);
 
 		free(command);
 		free(str);
 	}
-	exit(exit_status);
+	exit(*status);
 }

@@ -25,7 +25,7 @@ void line_to_array(char *str, char **command);
 int execute_builtin_cmd(char *tokenised_array);
 
 int print_env(char **array);
-int checkbuiltin(char **array, char **environ, char *str);
+int checkbuiltin(char **array, char **environ, char *str, int *status);
 
 char *_getenv(const char *name);
 char *find_executable_in_path(char *command);

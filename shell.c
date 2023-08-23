@@ -40,5 +40,6 @@ int main(void)
 		free(command);
 		free(str);
 	}
+	free(*status);
 	exit(*status);
 }

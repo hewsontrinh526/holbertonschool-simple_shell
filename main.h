@@ -24,9 +24,8 @@ int fork_the_child(char **command, char **environ, char **str);
 void line_to_array(char *str, char **command);
 int execute_builtin_cmd(char *tokenised_array);
 
-int print_env(void);
-int exit_shell(void);
-int checkbuiltin(char **array, int *status, char *str);
+int print_env(char **array);
+int checkbuiltin(char **array, char **environ, int *status, char *str);
 
 char *_getenv(const char *name);
 char *find_executable_in_path(char *command);

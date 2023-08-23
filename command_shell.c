@@ -28,6 +28,7 @@ int fork_the_child(char **command, char **environ, char **str)
 
 	if (child == -1)
 	{
+		printf("./hsh: 1: %s: not found\n", command[0]);
 		perror("fork");
 		exit(EXIT_FAILURE);
 	}

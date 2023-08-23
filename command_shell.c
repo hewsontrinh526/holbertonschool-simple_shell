@@ -70,7 +70,7 @@ void line_to_array(char *str, char **command)
 	char *token;
 
 	i = 0;
-	delim = " \t\n";
+	delim = " \t\n\r";
 	token = strtok(str, delim);
 
 	while (token != NULL)

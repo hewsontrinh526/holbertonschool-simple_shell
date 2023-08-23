@@ -24,7 +24,7 @@ int checkbuiltin(char **array, int *status, char *str)
 	}
 	if (strcmp(array[0], "exit") == 0)
 	{
-		free(array);
+		free(str);
 		exit(*status);
 	}
 	else if (strcmp(array[0], "env") == 0)

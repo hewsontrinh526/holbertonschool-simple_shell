@@ -35,7 +35,7 @@ int fork_the_child(char **command, char **environ, char **str)
 				perror("Error executing command");
 				free(command);
 				free(*str);
-				exit(127);
+				exit(EXIT_FAILURE);
 			}
 		}
 		else
@@ -48,7 +48,7 @@ int fork_the_child(char **command, char **environ, char **str)
 					perror("Error executing command");
 					free(command);
 					free(*str);
-					exit(127);
+					exit(EXIT_FAILURE);
 				}
 			}
 			else

@@ -1,5 +1,13 @@
 #include "main.h"
 
+/**
+ * main - A program that returns a simple shell, emulating some functionality
+ *
+ * @ac: User input count, this is unused for this program
+ * @av: Array of user inputs where index 0 is this program/command name
+ *
+ * Return: 0 on success, else 127 if the program is not found
+ */
 int main(__attribute__((unused)) int ac, char *av[])
 {
 	char *buffer;

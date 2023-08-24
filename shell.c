@@ -11,8 +11,6 @@ int main(void)
 	int exit_status;
 	int status;
 
-	status = 0;
-
 	while (1)
         {
 		buffer = NULL;
@@ -27,14 +25,14 @@ int main(void)
 
 		line_to_array(str, command);
 
-		built_in_checker = checkbuiltin(command, environ, &status, str);
+		built_in_checker = checkbuiltin(command, environ, str, &status);
 
 		if (built_in_checker == 1)
 		{
 			continue;
 		}
 
-		exit_status = fork_the_child(command, environ, &str, &status);
+		exit_status = fork_the_child(command, environ, &str);
 
 		free(command);
 		free(str);

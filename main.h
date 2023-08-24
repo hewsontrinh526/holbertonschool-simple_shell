@@ -14,7 +14,7 @@
 extern char **environ;
 
 void get_input(char **buffer, size_t *bufsize, ssize_t *read);
-int fork_the_child(char **command, char **environ, char **str);
+int fork_the_child(char **command, char **environ, char **str, int *status);
 void line_to_array(char *str, char **command);
 int execute_builtin_cmd(char *tokenised_array);
 

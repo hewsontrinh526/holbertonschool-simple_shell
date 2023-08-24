@@ -5,7 +5,7 @@ int main(__attribute__((unused)) int ac, char *av[])
 	char *buffer;
 	size_t bufsize;
 	ssize_t read;
-        char *cmd[124];
+        char *cmd[1024];
 	char *str;
 	int built_in_checker;
 	int exit_status;

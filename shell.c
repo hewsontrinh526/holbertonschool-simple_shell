@@ -34,7 +34,7 @@ int main(void)
 			continue;
 		}
 
-		exit_status = fork_the_child(command, environ, &str);
+		exit_status = fork_the_child(command, environ, &str, &status);
 
 		free(command);
 		free(str);

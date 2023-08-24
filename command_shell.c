@@ -38,10 +38,15 @@ int fork_the_child(char **command, char **environ, char **str)
 	}
 	else
 	{
-		wait(&status);
+		waitpid(child, &status, 0);
+
 		if (WIFEXITED(status))
 		{
 			exit_status = WEXITSTATUS(status);
+		}
+		else if (WIFSIGNALED(status))
+		{
+			exit_status = WTERMSIG(status);
 		}
 	}
 	return (exit_status);

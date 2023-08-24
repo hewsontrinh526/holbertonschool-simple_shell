@@ -15,7 +15,7 @@ int print_env(char **array)
 }
 
 
-int checkbuiltin(char **array, char **environ, int* status, char *str)
+int checkbuiltin(char **array, char **environ, __attribute__((unused)) int* status, char *str)
 {
 	if (array[0] == NULL)
 	{

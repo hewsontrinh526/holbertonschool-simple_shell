@@ -14,10 +14,6 @@ char *_getenv(char *name)
 		if (strncmp(environ[i], name, n) == 0)
 		{
 			string = strchr(environ[i], '=');
-			if (*(string + 1) == '\0')
-			{
-				return (NULL);
-			}
 			return (string);
 		}
 		i = i + 1;

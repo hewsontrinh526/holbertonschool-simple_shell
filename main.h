@@ -10,18 +10,28 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <ctype.h>
+#include <errno.h>
+#include <dirent.h>
 
 extern char **environ;
+struct dirent *_readdir(DIR *dp);
 
+/* In built_in.c */
+int print_env(char **array);
+int checkbuiltin(char **array, char **environ, char *str, int *status);
+DIR *_opendir(char *name);
+struct dirent *_readdir(DIR *dp);
+
+/* In command_shell.c */
 void get_input(char **buffer, size_t *bufsize, ssize_t *read);
 int fork_the_child(char **command, char **environ, char **str);
 void line_to_array(char *str, char **command);
-int execute_builtin_cmd(char *tokenised_array);
+int executable_cmd(char *string);
 
-int print_env(char **array);
-int checkbuiltin(char **array, char **environ, char *str, int *status);
-
-char *_getenv(const char *name);
-char *find_executable_in_path(char *command);
+/* In find_path.c */
+char *_getenv(char *name);
+char *find_executable_in_path(char **cmd, char *prog_av);
+void string_into_words(char *string, char **words);
+char *get_exe_string(char *path, char *program_av);
 
 #endif

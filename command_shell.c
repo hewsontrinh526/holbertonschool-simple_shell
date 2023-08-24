@@ -18,13 +18,11 @@ void get_input(char **buffer, size_t *bufsize, ssize_t *read)
 	}
 }
 
-int fork_the_child(char **command, char **environ, char **str)
+int fork_the_child(char **command, char **environ, char **str, int *status)
 {
 	int child;
-	int status;
-	int exit_status;
+	int wait_status;
 
-	exit_status = 0;
 	child = fork();
 
 	if (child == 0)
@@ -33,23 +31,23 @@ int fork_the_child(char **command, char **environ, char **str)
 		{
 			printf("EXECVE FAIL\n");
 			free(*str);
-			exit(EXIT_FAILURE);
+			exit(*status);
 		}
 	}
 	else
 	{
-		waitpid(child, &status, 0);
+		waitpid(child, &wait_status, 0);
 
-		if (WIFEXITED(status))
+		if (WIFEXITED(wait_status))
 		{
-			exit_status = WEXITSTATUS(status);
+			*status = WEXITSTATUS(wait_status);
 		}
-		else if (WIFSIGNALED(status))
+		else if (WIFSIGNALED(wait_status))
 		{
-			exit_status = WTERMSIG(status);
+			*status = WTERMSIG(wait_status);
 		}
 	}
-	return (exit_status);
+	return (*status);
 }
 
 void line_to_array(char *str, char **command)

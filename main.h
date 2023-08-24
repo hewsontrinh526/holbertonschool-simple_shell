@@ -24,7 +24,7 @@ struct dirent *_readdir(DIR *dp);
 
 /* In command_shell.c */
 void get_input(char **buffer, size_t *bufsize, ssize_t *read);
-int fork_the_child(char **command, char **environ, char **str);
+int fork_the_child(char **command, char **environ, char **str, int *status);
 void line_to_array(char *str, char **command);
 int executable_cmd(char *string);
 

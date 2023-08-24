@@ -59,8 +59,9 @@ int fork_the_child(char **command, char **environ, char **str)
 			}
 			else
 			{
-				printf("./hsh: %s: command not found\n", command[0]);
+				printf("./hsh: %s: not found\n", command[0]);
 				free(command);
+				free(*str);
 				exit (127);
 			}
 		}

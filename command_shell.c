@@ -20,58 +20,28 @@ void get_input(char **buffer, size_t *bufsize, ssize_t *read)
 
 int fork_the_child(char **command, char **environ, char **str)
 {
-	pid_t child;
-	char *filepath;
-	int fork_status;
-	int exit_status = 1;
+	int child;
+	int status;
+	int exit_status;
 
+	exit_status = 0;
 	child = fork();
 
-	if (child == -1)
+	if (child == 0)
 	{
-		printf("./hsh: 1: %s: not found\n", command[0]);
-		exit(127);
-	}
-	else if (child == 0)
-	{
-		if (strchr(command[0], '/') != NULL)
+		if (execve(command[0], command, environ) == -1)
 		{
-			if (execve(command[0], command, environ) == -1)
-			{
-				perror("Error executing command");
-				free(command);
-				free(*str);
-				exit(127);
-			}
-		}
-		else
-		{
-			filepath = find_executable_in_path(command[0]);
-			if (filepath != NULL)
-			{
-				if (execve(filepath, command, environ) == -1)
-				{
-					perror("Error executing command");
-					free(command);
-					free(*str);
-					exit(127);
-				}
-			}
-			else
-			{
-				printf("./hsh: %s: not found\n", command[0]);
-				free(command);
-				free(*str);
-				exit (127);
-			}
+			printf("EXECVE FAIL\n");
+			free(*str);
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
-		wait(&fork_status);
-		if (WIFEXITED(fork_status))
+		wait(&status);
+		if (WIFEXITED(status))
 		{
-			exit_status = WEXITSTATUS(fork_status);
+			exit_status = WEXITSTATUS(status);
 		}
 	}
 	return (exit_status);
@@ -94,4 +64,18 @@ void line_to_array(char *str, char **command)
 		i = i + 1;
 	}
 	command[i] = NULL;
+}
+
+int executable_cmd(char *string)
+{
+	struct stat st;
+
+	if (stat(string, &st) == 0 && st.st_mode & S_IXUSR)
+	{
+		return (1);
+	}
+	else
+	{
+		return (0);
+	}
 }

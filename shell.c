@@ -45,7 +45,7 @@ int main(__attribute__((unused)) int ac, char *av[])
 			}
 		}
 
-		exit_status = fork_the_child(cmd, environ, &str);
+		exit_status = fork_the_child(cmd, environ, &str, &status);
 
 		if (k == 1)
 		{

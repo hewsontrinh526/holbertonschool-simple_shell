@@ -11,7 +11,9 @@ int main(void)
 	int exit_status;
 	int status;
 
-        while (1)
+	status = 0;
+
+	while (1)
         {
 		buffer = NULL;
 		bufsize = 0;

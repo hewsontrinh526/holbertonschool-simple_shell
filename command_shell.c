@@ -18,11 +18,11 @@ void get_input(char **buffer, size_t *bufsize, ssize_t *read)
 	}
 }
 
-int fork_the_child(char **command, char **environ, char **str)
+int fork_the_child(char **command, char **environ, char **str, int *status)
 {
 	pid_t child;
 	char *filepath;
-	int status;
+	int fork_status;
 	int exit_status = 1;
 
 	child = fork();
@@ -41,6 +41,7 @@ int fork_the_child(char **command, char **environ, char **str)
 				perror("Error executing command");
 				free(command);
 				free(*str);
+				*status = 2;
 				exit(EXIT_FAILURE);
 			}
 		}
@@ -67,10 +68,10 @@ int fork_the_child(char **command, char **environ, char **str)
 	}
 	else
 	{
-		wait(&status);
-		if (WIFEXITED(status))
+		wait(&fork_status);
+		if (WIFEXITED(fork_status))
 		{
-			exit_status = WEXITSTATUS(status);
+			exit_status = WEXITSTATUS(fork_status);
 		}
 	}
 	return (exit_status);

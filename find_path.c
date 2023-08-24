@@ -23,12 +23,12 @@ char *_getenv(char *name)
 
 char *find_executable_in_path(char **cmd, char *prog_av)
 {
-	char *path = strdup(_getenv("PATH"));
+	char *path;
 	char *dir;
 	char *each_path[100];
 	int i;
 	DIR *dp;
-	struct dirent *ep;
+	struct dirent *ep = NULL;
 
 	path = strdup(_getenv("PATH="));
 
@@ -53,6 +53,7 @@ char *find_executable_in_path(char **cmd, char *prog_av)
 			if (strcmp(*cmd, ep->d_name) == 0)
 			{
 				*cmd = get_exe_string(each_path[i], ep->d_name);
+				free(dir);
 				free(path);
 				closedir(dp);
 				return (*cmd);
@@ -62,6 +63,7 @@ char *find_executable_in_path(char **cmd, char *prog_av)
 		closedir(dp);
 		i = i + 1;
 	}
+	free(dir);
 	free(path);
 	fprintf(stderr, "%s: %s: %s: not found\n", prog_av, "1", *cmd);
 	return (NULL);
@@ -89,14 +91,15 @@ char *get_exe_string(char *path, char *program_av)
 	char *string;
 	size_t size;
 
-	size = sizeof(*string) * (strlen(program_av) + 2 + strlen(path));
-	string = malloc(size * 1);
+	size = sizeof(*string) * (strlen(program_av) + 2 + strlen(path));;
+	string = (char *)malloc(size);
 
 	if (string == NULL)
 	{
 		perror("malloc");
 		return (NULL);
 	}
+	string[0] = '\0';
 	strcat(string, path);
 	strcat(string, "/");
 	strcat(string, program_av);

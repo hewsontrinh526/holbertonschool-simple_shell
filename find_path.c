@@ -1,8 +1,13 @@
 #include "main.h"
+
 /**
- * _getenv - Searches for the environment variable with the given name and returns its value after the equal sign (=).
+ * _getenv - Searches for the environment variable with the given name
+ * and returns its value after the equal sign (=).
+ *
  * @name: A string representing the name of the environment variable.
- * Return: Pointer to the value of the environment variable if found, NULL if the environment variable is not found.
+ *
+ * Return: Pointer to the value of the environment variable if found, NULL
+ * if the environment variable is not found.
  */
 char *_getenv(char *name)
 {
@@ -24,23 +29,25 @@ char *_getenv(char *name)
 	}
 	return (NULL);
 }
+
 /**
- * find_executable_in_path - Searches for an executable file in the directories specified by the PATH environment variable.
+ * find_executable_in_path - Searches for an executable file in the
+ * directories specified by the PATH environment variable.
+ *
  * @cmd: A pointer to the command name string.
- * @prog_av: A string representing the name of the program calling this function (used for error messages).
- * Return: 
+ * @prog_av: A string representing the name of the program calling this
+ * function (used for error messages).
+ *
+ * Return: File path name as a string, else NULL.
  */
 char *find_executable_in_path(char **cmd, char *prog_av)
 {
-	char *path;
-	char *dir;
-	char *each_path[100];
+	char *path, *dir, *each_path[100];
 	int i;
 	DIR *dp;
 	struct dirent *ep = NULL;
 
 	path = strdup(_getenv("PATH="));
-
 	if (path == NULL)
 	{
 		fprintf(stderr, "%s: %s: %s: not found\n", prog_av, "1", *cmd);
@@ -49,7 +56,6 @@ char *find_executable_in_path(char **cmd, char *prog_av)
 
 	dir = strdup(path + 1);
 	string_into_words(dir, each_path);
-
 	i = 0;
 
 	while (each_path[i] != NULL && i < 99)
@@ -77,10 +83,15 @@ char *find_executable_in_path(char **cmd, char *prog_av)
 	fprintf(stderr, "%s: %s: %s: not found\n", prog_av, "1", *cmd);
 	return (NULL);
 }
+
 /**
- * string_into_words - Tokenizes a given string into an array of words, splitting it by colons (:).
+ * string_into_words - Tokenizes a given string into an array of
+ * words, splitting it by colons (:).
+ *
  * @string: A string representing the text to be tokenized.
  * @words: A pointer to the array where the tokenized words will be stored.
+ *
+ * Return: void.
  */
 void string_into_words(char *string, char **words)
 {
@@ -98,11 +109,16 @@ void string_into_words(char *string, char **words)
 	}
 	words[i] = NULL;
 }
+
 /**
- * get_exe_string - Constructs and returns the full path to an executable by concatenating the directory path with the executable name.
+ * get_exe_string - Constructs and returns the full path to an executable
+ * by concatenating the directory path with the executable name.
+ *
  * @path: A string representing the directory path.
  * @program_av: A string representing the name of the executable.
- * Return: Pointer to the full path of the executable if successful, NULL if memory allocation fails.
+ *
+ * Return: Pointer to the full path of the executable if successful, NULL
+ * if memory allocation fails.
  */
 char *get_exe_string(char *path, char *program_av)
 {

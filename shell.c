@@ -39,7 +39,7 @@ int main(__attribute__((unused)) int ac, char *av[])
 			{
 				free(str);
 				exit_status = 127;
-				continue;
+				return (exit_status);
 			}
 		}
 		exit_status = fork_the_child(cmd, environ, &str, &status);

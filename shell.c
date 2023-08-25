@@ -38,7 +38,7 @@ int main(__attribute__((unused)) int ac, char *av[])
 			if (cmd[0] == NULL)
 			{
 				free(str);
-				status = 127;
+				exit_status = 127;
 				continue;
 			}
 		}

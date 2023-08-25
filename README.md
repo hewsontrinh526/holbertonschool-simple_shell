@@ -14,7 +14,7 @@ This is a custom implementation of the shell program that runs most modern comma
 	<a href="#repository-contents">Repository Contents</a>
 	</li>
 	<li>
-	<a href="#Let's-get-started">Let's get started</a>
+	<a href="#getting-started">Getting Started</a>
 			<ul>
 			<li><a href="#installation">Installation</a></li>
 			<li><a href="#manual-page">Manual Page</a></li>
@@ -42,7 +42,7 @@ This is a custom implementation of the shell program that runs most modern comma
 
 `README.md`
 
-# Let's get started
+## Getting Started
 
 To access the custom shell, open terminal (on mac) or Windows Terminal (pc).
 ### Installation

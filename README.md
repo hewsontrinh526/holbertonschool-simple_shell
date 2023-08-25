@@ -20,7 +20,8 @@ This is a custom implementation of the shell program that runs most modern comma
 			<li><a href="#manual-page">Manual Page</a></li>
 			</ul>
 	</li>
-	<li>
+	<li><a href="#Examples-of-commands">Examples of commands</a></li>
+	<li><a href="#Flowchart">Flowchart</a></li>
 	<li>
 	<a href="#authors">Authors</a>
 	</li>
@@ -84,9 +85,12 @@ man ./man_1_simple_shell
 | `$ exit` | ...closes the shell |
 
 ---
+## Flowchart
 ![Simple Shell - Frame 3](https://github.com/hewsontrinh526/holbertonschool-simple_shell/assets/135479331/688fac6a-b0b1-4f46-9e89-8d0447a61195)
 
 ##### Flowchart of Simple Shell
+
+
 
 **Step One**:
 After starting, the shell decides if its in interactive mode or non-interactive mode. 

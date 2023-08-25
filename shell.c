@@ -38,7 +38,7 @@ int main(__attribute__((unused)) int ac, char *av[])
 			if (cmd[0] == NULL)
 			{
 				free(str);
-				exit (127);
+				return (127);
 			}
 		}
 		exit_status = fork_the_child(cmd, environ, &str, &status);

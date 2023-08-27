@@ -28,19 +28,36 @@ This is a custom implementation of the shell program that runs most modern comma
 	</ul>
 </details>
 
-# Repository Contents
+## Requirements
 
-`main.h`
+<ul>
+<li>Ubuntu 20.04 LTS</li>
+	<ul>
+		<li><a href="https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-		overview">Windows 10 or 11</a>
+		<li><a href="https://ubuntu.com/download/desktop">Mac</a>
+	</ul>
+<li>Follows the <a href="https://github.com/alx-tools/Betty/wiki">Betty</a> linter <a href="https://github.com/hs-hq/Betty/blob/main/betty-style.pl">style</a> and <a href="https://github.com/hs-hq/Betty/blob/main/betty-doc.pl">documentation</a></li>
+<li>No more than 5 functions per file</li>
+</ul>
 
-`shell.c`
+## Repository Contents
 
-`command_shell.c`
+| **File** | **Description**|
+|----------|----------------|
+|`main.h`| A header file containing the prototype functions and the global variable `environ` |
+|`shell.c`| A `C` program that contains the main function |
+|`command_shell.c`| A `C` program that contains the function `get_input`, `fork_the_child`, `line_to_array` and `executable_cmd`|
+|`find_path.c`| A`C` program that contains the functions `_getenv`, `find_exectuable_in_path`, `string_into_words` and `get_exe_string` |
+|`built_in.c`| A`C` program that contains the functions `print_env`, `checkbuiltin`, `_opendir` and `_readdir` |
 
-`find_path.c`
+## Features
 
-`built_in.c`
-
-`README.md`
+- Includes built-in commands `exit` and `env`
+	- `exit` closes the shell
+	- `env` prints the environment
+- Allows for commands to be executed with the `$PATH` environment variable
+- Supports both interactive and non-interactive mode
+- Basic error handling
 
 ## Getting Started
 
@@ -73,10 +90,10 @@ man ./man_1_simple_shell
 | Command | Output |
 | --- | --- |
 | `$ echo Hello, World` | `Hello, World`  |
-| `$ pwd` | `/folder` |
+| `$ pwd` | `/holberton-simple_shell` |
 | `$ ls` | `built_in.c  command_shell.c  find_path.c  hsh  main.h  README.md  shell.c` |
-| `$ touch testfile` `$ ls` | `built_in.c  command_shell.c  find_path.c  hsh  main.h  README.md  shell.c testfile` |
-| `$ rm testfile` `$ ls` | `built_in.c  command_shell.c  find_path.c  hsh  main.h  README.md  shell.c` |
+| `$ touch holberton_test` `$ ls` | `built_in.c  command_shell.c  find_path.c  holberton_test  hsh  main.h  README.md  shell.c` |
+| `$ rm holberton_test` `$ ls` | `built_in.c  command_shell.c  find_path.c  hsh  main.h  README.md  shell.c` |
 | `$ which ls` | `/usr/bin/ls` |
 | `$ cp main.h mane.h` `$ ls` | `built_in.c  command_shell.c  find_path.c  hsh  main.h  README.md  shell.c  mane.h` |
 | `$ mv mane.h /tmp/` `$ ls /tmp/` | `mane.h` |
@@ -85,7 +102,10 @@ man ./man_1_simple_shell
 | `$ exit` | ...closes the shell |
 
 ---
-## Flowchart
+
+##Usage
+
+### Flowchart
 ![Simple Shell - Frame 3](https://github.com/hewsontrinh526/holbertonschool-simple_shell/assets/135479331/688fac6a-b0b1-4f46-9e89-8d0447a61195)
 
 ##### Flowchart of Simple Shell
@@ -116,6 +136,52 @@ If it is ****not**** one of the built-in commands, it will check if the command 
 **Step Eight**:
 If so, it will split the process into child and parent processes and execute the command.
 
+### Interactive mode
+To open the simple shell in the interactive mode type the below:
+
+```
+./hsh
+```
+This will open the simple shell with a prompt `$` and allow the user to input commands. Example:
+
+```
+./hsh
+
+$ _enter-your-command-here_
+```
+Commands can then be entered after the `$` and run, if it is a known command, it will execute, otherwise, an error message will appear.
+
+To close the simple shell:
+
+```
+$ exit
+```
+
+**Output Examples**
+
+| **User input** | **Expected output**|
+|------------|-----------------|
+|`/bin/ls` | Lists the contents of the current directory e.g. ``` hsh main.c shell.c ``` |
+|`ls` | Lists the contents of the current directory e.g. ``` hsh main.c shell.c ``` |
+|`ls -l /tmp`| <pre>-rw-r--r-- 1 root  root  2519 Jun 15 17:44 32 <br>|
+
+
+### Non-interactive mode
+
+The simple shell does not need to be opened. Commands can be piped into the simple shell executable using `echo`. For example, to run `/bin/ls` in the simple shell in the non-interactive mode, use the below:
+
+```
+echo "/bin/ls" | ./hsh
+```
+Once the process has been executed, there is no need to `exit` as the simple shell does not open in the non-interactive mode.
+
+**Output Examples**
+
+| **User input** | **Expected output**|
+|------------|-----------------|
+|`echo "/bin/ls" \| ./hsh` | Lists the contents of the current directory e.g. ``` hsh main.c shell.c ``` |
+|`echo "ls" \| ./hsh` | Lists the contents of the current directory e.g. ``` hsh main.c shell.c ``` |
+|`echo "ls -l /tmp" \| ./hsh`| <pre>-rw-r--r-- 1 root  root  2519 Jun 15 17:44 32 <br>|
 
 # Authors
 

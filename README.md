@@ -31,7 +31,9 @@ This is a custom implementation of the shell program that runs most modern comma
 	<ul>
 	<li><a href="#Examples-of-commands">Examples of commands</a></li>
 	<li><a href="#Flowchart">Flowchart</a></li>
-	</ul
+	<li><a href="#interactive-mode">Interactive Mode</a></li>
+	<li><a href="#non-interactive-mode">Non-interactive Mode</a></li>
+	</ul>
 	</li>
 	<li>
 	<a href="#authors">Authors</a>

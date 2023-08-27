@@ -11,7 +11,13 @@ This is a custom implementation of the shell program that runs most modern comma
 	<summary>Table of Contents</summary>
 	<ul>
 	<li>
+	<a href="#requirements">Requirements</a>
+	</li>
+	<li>
 	<a href="#repository-contents">Repository Contents</a>
+	</li>
+	<li>
+	<a href="#features">Features</a>
 	</li>
 	<li>
 	<a href="#getting-started">Getting Started</a>
@@ -20,8 +26,13 @@ This is a custom implementation of the shell program that runs most modern comma
 			<li><a href="#manual-page">Manual Page</a></li>
 			</ul>
 	</li>
+	<li>
+	<a href="#usage">Usage</a>
+	<ul>
 	<li><a href="#Examples-of-commands">Examples of commands</a></li>
 	<li><a href="#Flowchart">Flowchart</a></li>
+	</ul
+	</li>
 	<li>
 	<a href="#authors">Authors</a>
 	</li>
@@ -103,7 +114,7 @@ man ./man_1_simple_shell
 
 ---
 
-##Usage
+## Usage
 
 ### Flowchart
 ![Simple Shell - Frame 3](https://github.com/hewsontrinh526/holbertonschool-simple_shell/assets/135479331/688fac6a-b0b1-4f46-9e89-8d0447a61195)
